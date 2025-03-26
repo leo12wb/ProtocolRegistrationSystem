@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "PN4Ucr5vJl/6SZJjq88CpEGnmqZVIyyJDcodz9N5DwAgDd2VFKPLN99k+gOWnoPnngpVmPs3uA8qYiVl3MWJjw==",
+  "dgSpecHash": "vz3iuPB8aa+plamhl7zmIAhIdj++leqOLFDKsnKO/rBA+gPto0OcoXitp4VtMly7bR26dQp1gR6DpaYAEkcV4Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\leona\\OneDrive\\Documentos\\ProtocolRegistrationSystem\\ProtocolRegistrationSystem.csproj",
+  "projectFilePath": "C:\\Users\\leona\\OneDrive\\Documentos\\gt\\ProtocolRegistrationSystem\\ProtocolRegistrationSystem.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\leona\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
   ],

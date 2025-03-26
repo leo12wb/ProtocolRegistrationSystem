@@ -1,25 +1,69 @@
-@model List<ProtocolRegistrationSystem.Models.Protocol>
+@{
+    ViewData["Title"] = "Protocolos Registrados";
+}
 
 <h2>Protocolos Registrados</h2>
 
-<a href="/Protocolo/Create">Novo Protocolo</a>
+<a href="/protocol/create">Novo Protocolo</a>
 
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Tipo</th>
-        <th>Descrição</th>
-        <th>Data Entrada</th>
-        <th>Prazo</th>
-    </tr>
-    @foreach (var protocolo in Model)
-    {
-        <tr>
-            <td>@protocolo.Id</td>
-            <td>@protocolo.Tipo</td>
-            <td>@protocolo.Descricao</td>
-            <td>@protocolo.DataEntrada.ToShortDateString()</td>
-            <td>@protocolo.Prazo.ToShortDateString()</td>
-        </tr>
+<div id="app">
+    <p v-if="loading">Carregando protocolos...</p>
+    <p v-if="error" class="error">{{ error }}</p>
+
+    <table v-if="protocols.length > 0" border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tipo</th>
+                <th>Descrição</th>
+                <th>Data Entrada</th>
+                <th>Prazo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="protocol in protocols" :key="protocol.id">
+                <td>{{ protocol.id }}</td>
+                <td>{{ protocol.tipo }}</td>
+                <td>{{ protocol.descricao }}</td>
+                <td>{{ formatDate(protocol.dataEntrada) }}</td>
+                <td>{{ formatDate(protocol.prazo) }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p v-if="protocols.length === 0 && !loading">Nenhum protocolo encontrado.</p>
+</div>
+
+<!-- Vue.js 3 via CDN -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+const { createApp, ref, onMounted } = Vue;
+
+createApp({
+    setup() {
+        const protocols = ref([]);
+        const loading = ref(true);
+        const error = ref(null);
+
+        const fetchProtocols = async () => {
+            try {
+                const response = await fetch('/api/protocols');
+                if (!response.ok) throw new Error("Erro ao buscar os protocolos");
+                protocols.value = await response.json();
+            } catch (err) {
+                error.value = err.message;
+            } finally {
+                loading.value = false;
+            }
+        };
+
+        const formatDate = (dateStr) => {
+            return new Date(dateStr).toLocaleDateString();
+        };
+
+        onMounted(fetchProtocols);
+
+        return { protocols, loading, error, formatDate };
     }
-</table>
+}).mount('#app');
+</script>
