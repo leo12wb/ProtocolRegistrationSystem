@@ -1,0 +1,19 @@
+
+<h2>Novo Protocolo</h2>
+
+<form asp-action="Create" method="post">
+    <label>Tipo:</label>
+    <select asp-for="Type">
+        <option value="Requerimento">Requerimento</option>
+        <option value="Licitação">Licitação</option>
+        <option value="Ofício">Ofício</option>
+    </select>
+
+    <label>Descrição:</label>
+    <input asp-for="Description" required />
+
+    <label>Prazo:</label>
+    <input asp-for="Term" type="date" required />
+
+    <button type="submit">Salvar</button>
+</form>

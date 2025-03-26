@@ -1,0 +1,25 @@
+@model List<ProtocolRegistrationSystem.Models.Protocol>
+
+<h2>Protocolos Registrados</h2>
+
+<a href="/Protocolo/Create">Novo Protocolo</a>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Tipo</th>
+        <th>Descrição</th>
+        <th>Data Entrada</th>
+        <th>Prazo</th>
+    </tr>
+    @foreach (var protocolo in Model)
+    {
+        <tr>
+            <td>@protocolo.Id</td>
+            <td>@protocolo.Tipo</td>
+            <td>@protocolo.Descricao</td>
+            <td>@protocolo.DataEntrada.ToShortDateString()</td>
+            <td>@protocolo.Prazo.ToShortDateString()</td>
+        </tr>
+    }
+</table>
